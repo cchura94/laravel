@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 
 Route::get("/cursos", function(){
-    echo "Mi Lista de Cursos";
+    echo "Mi Lista de cursos";
 });
 
 Route::get("/lista-cursos", function(){
@@ -38,7 +38,18 @@ Route::get("/cursos/{nombre}/modulo/{mod}", function($nom, $mod){
 });
 
 Route::get("/nosotros", function(){
-    
-    return view("acerca");
+    return view("acerca"); 
 });
 
+Route::get("/contacto", function(){
+    return view("contacto"); 
+});
+
+Route::get("/persona", "PersonaController@listar")->name("lista_personas");
+Route::get("/persona/crear", "PersonaController@crear")->name("crear_personas");
+Route::get("/persona/{id}", "PersonaController@ver")->name("ver_personas");
+Route::get("/persona/{id}/editar", "PersonaController@editar")->name("editar_personas");
+
+Route::post("/persona", "PersonaController@guardar");
+Route::put("/persona/{id}", "PersonaController@modificar");
+Route::delete("/persona/{id}", "PersonaController@eliminar");
