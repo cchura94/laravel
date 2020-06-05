@@ -45,6 +45,8 @@ Route::get("/contacto", function(){
     return view("contacto"); 
 });
 
+Route::get("/persona/buscar", "PersonaController@buscador");
+
 Route::get("/persona", "PersonaController@listar")->name("lista_personas");
 Route::get("/persona/crear", "PersonaController@crear")->name("crear_personas");
 Route::get("/persona/{id}", "PersonaController@ver")->name("ver_personas");
@@ -53,3 +55,6 @@ Route::get("/persona/{id}/editar", "PersonaController@editar")->name("editar_per
 Route::post("/persona", "PersonaController@guardar");
 Route::put("/persona/{id}", "PersonaController@modificar");
 Route::delete("/persona/{id}", "PersonaController@eliminar");
+
+//Ruta con recursos para un controlador
+Route::resource("/categoria", "CategoriaController");

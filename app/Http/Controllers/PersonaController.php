@@ -20,12 +20,14 @@ class PersonaController extends Controller
 
     public function ver($id)
     {
-        return "Mostrando: $id";
+        //return "Mostrando: $id";
+        return view("admin.persona.mostrar");
     }
 
     public function editar($id)
     {
-        return "Editando..  $id";
+        //return "Editando..  $id";
+        return view("admin.persona.editar");
     }
 
     public function guardar(Request $request)
@@ -42,5 +44,12 @@ class PersonaController extends Controller
     public function eliminar($id)
     {
         return "eliminando $id";
+    }
+
+    public function buscador(Request $request)
+    {
+        $buscar = $request->nombre;  //$_GET['nombre'];
+        //echo "Buscando:  $buscar";
+        return view("admin.persona.listar");
     }
 }
