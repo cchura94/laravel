@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Personas</title>
+    
+    <link rel="stylesheet" href="{{ asset('/css/bootstrap.css') }}">
+    
+    <script src="{{ asset('/js/jquery.js') }}"></script>
+    <script src="{{ asset('/js/bootstrap.js') }}"></script>
 </head>
 <body>
     <h1>Lista de Personas</h1>
 
-    <a href="/persona/crear">Nueva Persona</a>
-    <table border="1">
+    <a href="/persona/crear" class="btn btn-outline-primary btn-sm">Nueva Persona</a>
+    <table class="table table-striped table-hover">
         <tr>
             <td>ID</td>
             <td>NOMBRE</td>
@@ -22,8 +27,8 @@
             <td>Juan</td>
             <td>932238</td>
             <td>
-                <a href="/persona/juan">ver</a>
-                <a href="/persona/juan/editar">editar</a>
+                <a class="btn btn-success btn-xs" href="/persona/juan">ver</a>
+                <a class="btn btn-warning btn-xs" href="/persona/juan/editar">editar</a>
             </td>
         </tr>
         <tr>

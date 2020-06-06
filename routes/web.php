@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 //Funcion cerrada
 Route::get('/', function () {    
-    return view('welcome');
+    return view('inicio');
 });
 
 
@@ -58,3 +58,5 @@ Route::delete("/persona/{id}", "PersonaController@eliminar");
 
 //Ruta con recursos para un controlador
 Route::resource("/categoria", "CategoriaController");
+Route::resource("producto", "ProductoController");
+Route::resource("proveedor", "ProveedorController");
