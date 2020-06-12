@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Categoria;
 
 class CategoriaController extends Controller
 {
@@ -15,14 +16,16 @@ class CategoriaController extends Controller
     {
         // listar
         //$datos = select * from categorias
-        $categorias = [
+        /*$categorias = [
             ["nombre" => "ropa",
              "descripcion" => "ropa de niños"
             ],
             ["nombre" => "muebles",
              "descripcion" => "muebles de Oficina"
             ],
-        ];
+        ];*/
+        $categorias = Categoria::All();
+
         $titulo = "Lista de Categorias Prueba";
         return view("admin.categoria.listar", ["categorias" => $categorias, "titulo" => $titulo]);
     }
@@ -48,6 +51,13 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         // guardar
+        //return $request;
+        $cat = new Categoria;
+        $cat->nombre = $request->nombre;
+        $cat->descripcion = $request->descripcion;
+        $cat->save();
+        
+        return redirect("/categoria")->with('ok', 'Categoria Registrado Correctamente');
     }
 
     /**
@@ -58,6 +68,9 @@ class CategoriaController extends Controller
      */
     public function show($id)
     {
+        $categoria = Categoria::find($id);
+        return redirect("/categoria")->with("categoria", $categoria);
+
         $otrodato = "Otro Dato";
         // ver
         //return view("admin.categoria.mostrar", ["id" => $id]);
@@ -74,7 +87,8 @@ class CategoriaController extends Controller
     public function edit($id)
     {
         // editar
-        return view("admin.categoria.editar");
+        $categoria = Categoria::find($id);
+        return view("admin.categoria.editar", compact('categoria'));
     }
 
     /**
@@ -87,6 +101,15 @@ class CategoriaController extends Controller
     public function update(Request $request, $id)
     {
         // modificar
+        $cat = Categoria::find($id);
+        $cat->nombre = $request->nombre;
+        $cat->descripcion = $request->descripcion;
+        $cat->save();
+        
+        return redirect("/categoria")->with('ok', 'Categoria Modificada Correctamente');
+    
+
+
     }
 
     /**
