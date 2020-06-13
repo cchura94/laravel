@@ -100,6 +100,10 @@
         @endforeach    
     </tbody>
 </table>
+
+{{ $categorias->links() }}
+TOTAL CATEGORIAS: {{ $categorias->total() }}
+
 @if(session('categoria'))
 {{ session('categoria') }}
 @endif

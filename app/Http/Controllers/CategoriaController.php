@@ -24,7 +24,8 @@ class CategoriaController extends Controller
              "descripcion" => "muebles de Oficina"
             ],
         ];*/
-        $categorias = Categoria::All();
+        //$categorias = Categoria::All();
+        $categorias = Categoria::paginate(3);
 
         $titulo = "Lista de Categorias Prueba";
         return view("admin.categoria.listar", ["categorias" => $categorias, "titulo" => $titulo]);
@@ -50,6 +51,10 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
+        //validación
+        $request->validate([
+            "nombre" => "required|min:2|max:30|unique:categorias"
+        ]);
         // guardar
         //return $request;
         $cat = new Categoria;
