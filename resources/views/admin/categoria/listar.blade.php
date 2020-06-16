@@ -28,7 +28,7 @@
             <td>
                 <!--a href="{{ route('categoria.show', $cat->id) }}" class="btn btn-success">ver</a-->
                 <a href="{{ route('categoria.edit', $cat->id) }}" class="btn btn-warning">editar</a>
-
+                <a href="{{ route('categoria.show', $cat->id) }}" class="btn btn-outline-info">ver productos</a>
                 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$cat->id}}">
   ver

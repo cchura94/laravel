@@ -10,4 +10,9 @@ class Producto extends Model
     {
         return $this->belongsTo("App\Categoria");
     }
+
+    public function proveedores()
+    {
+        return $this->belongsToMany("App\Proveedor");
+    }
 }

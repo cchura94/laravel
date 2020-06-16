@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Categoria;
+use App\Producto;
 
 class ProductoController extends Controller
 {
@@ -23,7 +25,8 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view("admin.producto.crear");
+        $categorias = Categoria::All();
+        return view("admin.producto.crear", compact('categorias'));
     }
 
     /**
@@ -34,7 +37,21 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nombre_archivo = '';
+        if($file = $request->file('imagen')){
+            $nombre_archivo = $file->getClientOriginalName();
+            $file->move('imagenes', $nombre_archivo);
+        }
+
+        $prod = new Producto;
+        $prod->nombre = $request->nombre;
+        $prod->cantidad = $request->cantidad;
+        $prod->precio = $request->precio;
+        $prod->descripcion = $request->descripcion;
+        $prod->categoria_id = $request->categoria_id;
+        $prod->imagen = 'imagenes/'.$nombre_archivo;
+        $prod->save();
+        return redirect("/producto")->with('ok', "Producto registrado");
     }
 
     /**

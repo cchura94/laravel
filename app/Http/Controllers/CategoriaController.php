@@ -74,13 +74,13 @@ class CategoriaController extends Controller
     public function show($id)
     {
         $categoria = Categoria::find($id);
-        return redirect("/categoria")->with("categoria", $categoria);
+        //return redirect("/categoria")->with("categoria", $categoria);
 
         $otrodato = "Otro Dato";
         // ver
         //return view("admin.categoria.mostrar", ["id" => $id]);
         //return view("admin.categoria.mostrar")->with("id", $id);
-        return view("admin.categoria.mostrar", compact("id", "otrodato"));
+        return view("admin.categoria.mostrar", compact("id", "otrodato", 'categoria'));
     }
 
     /**

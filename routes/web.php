@@ -58,5 +58,16 @@ Route::delete("/persona/{id}", "PersonaController@eliminar");
 
 //Ruta con recursos para un controlador
 Route::resource("/categoria", "CategoriaController");
-Route::resource("producto", "ProductoController");
 Route::resource("proveedor", "ProveedorController");
+
+//Route::resource("producto", "ProductoController");
+
+
+Route::get("/producto", "ProductoController@index")->name("producto.index");
+Route::get("/producto/create", "ProductoController@create")->name("producto.create");
+Route::get("/producto/{id}", "ProductoController@show")->name("producto.show");
+Route::get("/producto/{id}/edit", "ProductoController@edit")->name("producto.edit");
+
+Route::post("/producto", "ProductoController@store")->name("producto.store");
+Route::put("/producto/{id}", "ProductoController@update")->name("producto.update");
+Route::delete("/producto/{id}", "ProductoController@destroy")->name("producto.destroy");
