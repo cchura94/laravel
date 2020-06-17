@@ -45,29 +45,40 @@ Route::get("/contacto", function(){
     return view("contacto"); 
 });
 
-Route::get("/persona/buscar", "PersonaController@buscador");
-
-Route::get("/persona", "PersonaController@listar")->name("lista_personas");
-Route::get("/persona/crear", "PersonaController@crear")->name("crear_personas");
-Route::get("/persona/{id}", "PersonaController@ver")->name("ver_personas");
-Route::get("/persona/{id}/editar", "PersonaController@editar")->name("editar_personas");
-
-Route::post("/persona", "PersonaController@guardar");
-Route::put("/persona/{id}", "PersonaController@modificar");
-Route::delete("/persona/{id}", "PersonaController@eliminar");
-
-//Ruta con recursos para un controlador
-Route::resource("/categoria", "CategoriaController");
-Route::resource("proveedor", "ProveedorController");
-
-//Route::resource("producto", "ProductoController");
+Route::middleware(['auth'])->group(function () {
 
 
-Route::get("/producto", "ProductoController@index")->name("producto.index");
-Route::get("/producto/create", "ProductoController@create")->name("producto.create");
-Route::get("/producto/{id}", "ProductoController@show")->name("producto.show");
-Route::get("/producto/{id}/edit", "ProductoController@edit")->name("producto.edit");
+    Route::get("/persona/buscar", "PersonaController@buscador");
 
-Route::post("/producto", "ProductoController@store")->name("producto.store");
-Route::put("/producto/{id}", "ProductoController@update")->name("producto.update");
-Route::delete("/producto/{id}", "ProductoController@destroy")->name("producto.destroy");
+    Route::get("/persona", "PersonaController@listar")->name("lista_personas");
+    Route::get("/persona/crear", "PersonaController@crear")->name("crear_personas");
+    Route::get("/persona/{id}", "PersonaController@ver")->name("ver_personas");
+    Route::get("/persona/{id}/editar", "PersonaController@editar")->name("editar_personas");
+
+    Route::post("/persona", "PersonaController@guardar");
+    Route::put("/persona/{id}", "PersonaController@modificar");
+    Route::delete("/persona/{id}", "PersonaController@eliminar")->middleware('auth');
+
+    //Ruta con recursos para un controlador
+    Route::resource("/categoria", "CategoriaController")->middleware('auth');
+    Route::resource("proveedor", "ProveedorController")->middleware('auth');
+
+    //Route::resource("producto", "ProductoController");
+
+
+    Route::get("/producto", "ProductoController@index")->name("producto.index")->middleware('auth');
+    Route::get("/producto/create", "ProductoController@create")->name("producto.create");
+    Route::get("/producto/{id}", "ProductoController@show")->name("producto.show");
+    Route::get("/producto/{id}/edit", "ProductoController@edit")->name("producto.edit");
+
+    Route::post("/producto", "ProductoController@store")->name("producto.store");
+    Route::put("/producto/{id}", "ProductoController@update")->name("producto.update");
+    Route::delete("/producto/{id}", "ProductoController@destroy")->name("producto.destroy");
+
+    
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
+});
+
+Auth::routes(['register' => false]);

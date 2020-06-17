@@ -11,6 +11,12 @@
     
 @endif
 
+@auth
+<h1>Estas Logueado</h1>
+@else
+<h1>No estas Logueado</h1>
+@endauth
+
 <a href="{{ route('categoria.create') }}" class="btn btn-info">Nueva Categoria</a>
 <table class="table table-striped table-hover">
     <thead>
